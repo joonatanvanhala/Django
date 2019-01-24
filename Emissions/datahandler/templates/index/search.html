@@ -1,0 +1,17 @@
+{% extends 'index/layout.html' %}
+{% block content %}
+<div class="form">
+<form class="form-signin" action="{% url 'search' %}" method="post">
+  {% csrf_token %}
+   <select class="form-control" id="select" name="select">
+         <option value="" disabled selected>Select country</option>
+       {%for country in countries %}
+         <option value="{{ country }}">{{country}}</option>
+       {% endfor %}
+   </select>
+   <button class="btn btn-sq-xs btn-dange" type="submit">
+     <span class="glyphicon glyphicon-search"></span>
+   </button>
+ </form>
+ </div>
+ {% endblock %}

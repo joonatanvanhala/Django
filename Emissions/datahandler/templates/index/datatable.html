@@ -1,0 +1,49 @@
+{% extends 'index/layout.html' %}
+{% block content %}
+{% load static %}
+{% include 'index/search.html' %}
+<h2>{{selectedCountry}}</h2>
+<div class="container" name="showEmissions">
+    <div class="col-sm">
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Year</th>
+        <th scope="col">Population</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for year, population in populations.items %}
+        <tr>
+          <th scope="row">{{year}}</th>
+          <th scope="row">{{population}}</th>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <div class="col-sm">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">CO2 (kt)</th>
+      <th scope="col">Per capita</th>
+    </tr>
+  </thead>
+  <tbody>
+      {%for emission, percapita in emissions.items %}
+      <tr>
+        {% if percapita == "None" %}
+          <th scope="row">None</th>
+          <th scope="row">None</th>
+        {% else %}
+          <th scope="row">{{emission}}</th>
+          <th scope="row">{{percapita}}</th>
+        {% endif%}
+      </tr>
+      {% endfor %}
+  </tbody>
+  </table>
+</div>
+</div>
+{% endblock %}
