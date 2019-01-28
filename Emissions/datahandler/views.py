@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-import logging
 from django.conf import settings
 from urllib.request import urlopen
 import requests
