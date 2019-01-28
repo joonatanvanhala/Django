@@ -4,5 +4,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('testing', views.search, name='search')
+    path('country', views.search, name='search')
 ];

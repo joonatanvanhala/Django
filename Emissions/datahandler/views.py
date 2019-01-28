@@ -50,7 +50,7 @@ def search(request):
             "emissions": percapita,
             "populations" : countryPopulation,
             "countries" : countries,
-            "selectedCountry" : country 
+            "selectedCountry" : country
         }
         return render(request, 'index/datatable.html', content)
     else:
@@ -59,11 +59,13 @@ def search(request):
 def emissionsPerCapita(countryPopulation, countryEmissions):
         percapita = {} #key = country's emission value = per capita
         for year,emission in countryEmissions.items():
+            test = countryPopulation.get(year)
             if emission is None or countryPopulation.get(year) is None:
                 strKey = "None" + year
                 percapita[strKey] = "None"
             else:
-                percapita[emission] = "{0:.6f}".format(float(emission) / float(countryPopulation.get(year)))
+                co2Percapita = "{0:.7f}".format(float(emission) / float(countryPopulation.get(year)))
+                percapita[co2Percapita] = "{0:.3f}".format(float(emission))
         return percapita
 
 def findCountriesPopulation(country, request):

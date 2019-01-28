@@ -1,39 +1,101 @@
+/*TABLE   6da6ad    558ca8  34627a 233e4c*/
 .container {
-  opacity: 1;
-
-  display: flex; /* or inline-flex */
+  font-size: 0.9em;
+  margin-top: 10px;
+  opacity: 0.85;
+  display: flex;
+  margin-bottom: 65px;
   justify-content: center;
-
 }
 .container .table{
+  table-layout:auto;
+  background-color:#1b2942;
   opacity: 1;
-
   align-self: center;
   color: white;
 }
-.form-signin {
+/*SELECT FORM*/
+nav {
+  opacity: 0.9;
+  position: relative;
+  background-color: #1b2942;
+  height: 50px;
+  color:white;
+}
+h4{
+  color:white;
+}
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+}
+.form-search{
+  text-align: center;
+  display: flex;
+  /*z-index: 9;
+  position: fixed;
   opacity: 1;
   display: flex;
   margin-top: 20px;
-  width: 100%;
+  width: 300px;
   max-width: 330px;
-  margin: 100 auto;
+  margin: 100 auto;*/
 }
 .form {
-  opacity: 1;
-   width: 200px;
-   display: block;
+   opacity: 1;
+   width: 300px;
+   display: flex;
    margin-left: auto;
    margin-right: auto;
 }
+.form select{
+  color: #21324f;
+  background-color: white;
+  border-color: #21324f;
+}
 .form button{
+  background-color:white;
+  border-color: #21324f;
   opacity: 1;
   width: 40px;
-  background-color: #f4f4f4;
-  color:black;
 }
+.form i {
+ color: #21324f;
+}
+/*BACKGROUND*/
 html, body{
-  background-image: url("air2.png");
-  background-repeat: no-repeat;
-  background-size:cover;
+  font-family: 'Montserrat', sans-serif;
+  height: 100%;
+  background: url('glacier.jpg') no-repeat center center fixed;*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+/*COUNTRYNAME*/
+body h2 {
+  margin-top: 70px;
+  display: block;
+  text-align: center;
+  color:#21324f;
+}
+/*FOOTER*/
+.footer {
+  opacity: 0.9;
+  position: fixed;
+  text-align: center;
+  display: block;
+  width:100%;
+  font-size: 0.8em;
+  bottom: 0;
+  height: 20px;
+  float: right;
+  z-index: 1;
+  color:white;
+  background-color: #1b2942;
+}
+.footer a{
+  color:white;
 }

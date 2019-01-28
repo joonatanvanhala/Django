@@ -1,17 +1,24 @@
 {% extends 'index/layout.html' %}
 {% block content %}
-<div class="form">
-<form class="form-signin" action="{% url 'search' %}" method="post">
-  {% csrf_token %}
-   <select class="form-control" id="select" name="select">
-         <option value="" disabled selected>Select country</option>
-       {%for country in countries %}
-         <option value="{{ country }}">{{country}}</option>
-       {% endfor %}
-   </select>
-   <button class="btn btn-sq-xs btn-dange" type="submit">
-     <span class="glyphicon glyphicon-search"></span>
-   </button>
- </form>
- </div>
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+          <h4>Fossil Fuel Finder</h4>
+    </div>
+  <ul class="nav navbar-nav navbar-center">
+  <div class="form">
+  <form class="form-search" action="{% url 'search' %}" method="post">
+    {% csrf_token %}
+     <select class="form-control" id="select" name="select">
+           <option value="" disabled selected>Select country</option>
+         {%for country in countries %}
+           <option value="{{ country }}">{{country}}</option>
+         {% endfor %}
+     </select>
+     <button class="btn btn-sq-xs btn-dange" type="submit">
+       <i class='fas fa-search'></i>
+     </button>
+   </form>
+   </div>
+   </ul>
+ </nav>
  {% endblock %}
