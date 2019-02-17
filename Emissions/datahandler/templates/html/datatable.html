@@ -1,5 +1,6 @@
 {% block content %}
-{% include 'index/search.html' %}
+{% include 'html/search.html' %}
+{% load static %}
 <h2 class = "animated fadeIn">{{selectedCountry}}</h2>
 <div class="container" name="showEmissions">
     <div class="col-mr-0">
@@ -48,4 +49,10 @@
   </table>
 </div>
 </div>
+<script>
+  var countriesStr = "{{ countries }}";
+  var countriesArr = JSON.parse(countriesStr.replace(/&quot;/g,'"'));
+</script>
+<script src="{% static 'js/formValidation.js' %}"></script>
+<script src="{% static 'js/autoComplete.js' %}"></script>
 {% endblock %}

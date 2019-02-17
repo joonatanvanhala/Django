@@ -11,6 +11,7 @@ import operator
 from xml.etree import ElementTree
 import sys, io
 import zipfile
+import json
 
 # Create your views here.
 def index(request):
@@ -20,10 +21,10 @@ def index(request):
      global countries
      countries = findCountries()
      content = {
-      "countries" : countries
+      "countries" : json.dumps(countries)
      }
      #return HttpResponse(records)
-     return render(request, 'index/search.html', content)
+     return render(request, 'html/search.html', content)
 
 def findCountries():
     countries = []
@@ -38,7 +39,7 @@ def findCountries():
 def search(request):
     global rootEmissions
     if(request.method == 'POST'):
-        country = request.POST['select']
+        country = request.POST['myCountry']
         urlEmissions = "http://api.worldbank.org/v2/en/indicator/EN.ATM.CO2E.KT?downloadformat=xml"
         rootEmissions = getXml(urlEmissions)
         countryEmissions = findCountrysEmissions(country)
@@ -47,10 +48,10 @@ def search(request):
         content = {
             "emissions": percapita,
             "populations" : countryPopulation,
-            "countries" : countries,
+            "countries" : json.dumps(countries),
             "selectedCountry" : country
         }
-        return render(request, 'index/datatable.html', content)
+        return render(request, 'html/datatable.html', content)
     else:
         return redirect('/emissions')
 
