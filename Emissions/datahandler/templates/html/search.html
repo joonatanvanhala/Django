@@ -9,16 +9,9 @@
   <div class="form">
   <form autocomplete="off" class="form-search" action="{% url 'search' %}" method="post">
     {% csrf_token %}
-     <!--<select class="form-control" id="select" name="select">
-           <option value="" disabled selected>Select country</option>
-         {%for country in countries %}
-           <option value="{{ country }}">{{country}}</option>
-         {% endfor %}
-     </select>-->
      <div class="autocomplete" style="width:300px;">
          <input id="myInput" type="text" name="myCountry" placeholder="Country">
      </div>
-
      <button class="btn btn-sq-xs btn-dange" type="submit" id="submit">
        <i class='fas fa-search'></i>
      </button>
@@ -28,7 +21,10 @@
  </nav>
  <script>
    var countriesStr = "{{ countries }}";
-   var countriesArr = JSON.parse(countriesStr.replace(/&quot;/g,'"'));
+   var countriesStr2 = countriesStr.replace(/&#39;/g,'').replace(/&amp;/g, "&");
+   var countriesArr = countriesStr2.split("&quot;").filter(function(element){
+     return element != ", ";
+   });
  </script>
  <script src="{% static 'js/formValidation.js' %}"></script>
  <script src="{% static 'js/autoComplete.js' %}"></script>

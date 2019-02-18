@@ -56,14 +56,13 @@ def search(request):
         return redirect('/emissions')
 
 def emissionsPerCapita(countryPopulation, countryEmissions):
-        percapita = {} #key = country's emission value = per capita
+        percapita = {} #key = country's emission, value = per capita
         for year,emission in countryEmissions.items():
-            test = countryPopulation.get(year)
             if emission is None or countryPopulation.get(year) is None:
                 strKey = "None" + year
-                percapita[strKey] = "None"
+                percapita[strKey] = None
             else:
-                co2Percapita = "{0:.7f}".format(float(emission) / float(countryPopulation.get(year)))
+                co2Percapita = "{0:.9f}".format(float(emission) / float(countryPopulation.get(year)))
                 percapita[co2Percapita] = "{0:.3f}".format(float(emission))
         return percapita
 

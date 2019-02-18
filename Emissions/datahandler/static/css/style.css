@@ -2,28 +2,28 @@
 .container
 {
   margin-top: 10px;
-  opacity: 0.85;
   display: flex;
   margin-bottom: 65px;
   justify-content: center;
 }
 .container .table
 {
-  text-decoration: none;
   font-size: 1.0em;
   table-layout:auto;
-  background-color:#1b2942;
-  opacity: 1;
-  align-self: center;
-  color: white;
-}
-/*SELECT FORM*/
-nav {
-  opacity: 1;
-  position: relative;
-  background-color: #1b2942;
-  height: 50px;
+  background-color: rgba(255, 255,255,.2);
   color:white;
+  align-self: center;
+}
+
+/*SELECT FORM 1b2942*/
+#submit{
+  background-color: white;
+  margin-left: 4px;
+  border-style: none;
+}
+nav {
+  position: relative;
+  height: 50px;
 }
 h4{
   color:white;
@@ -34,35 +34,16 @@ h4{
     transform: translatex(-50%);
 }
 .form-search{
+  background-color: white;
   text-align: center;
   display: flex;
 }
-.form {
-   opacity: 1;
-   width: 300px;
-   display: flex;
-   margin-left: auto;
-   margin-right: auto;
-}
-.form select{
-  color: #21324f;
-  background-color: white;
-  border-color: #21324f;
-}
-.form button{
-  background-color:white;
-  border-color: #21324f;
-  opacity: 1;
-  width: 40px;
-}
-.form i {
- color: #21324f;
-}
+
 /*BACKGROUND*/
 html, body{
   font-family: 'Montserrat', sans-serif;
   height: 100%;
-  background: url('glacier.jpg') no-repeat center center fixed;*/
+  background: url('climate.jpg') no-repeat center center fixed;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -70,12 +51,10 @@ html, body{
 }
 /*COUNTRYNAME*/
 body h2 {
-  bottom: 0 !important;
-  padding-bottom: 0 !important;
   margin-top: 70px;
   display: block;
   text-align: center;
-  color:#21324f;
+  color: white;
 }
 /*FOOTER*/
 .footer {
@@ -89,27 +68,24 @@ body h2 {
   bottom: 0 !important;
   height: 20px;
   z-index: 1;
-  color:white;
-  background-color: #1b2942;
+  background-color: white;
 }
 .footer a{
-  color:white;
+  color:#1b2942;
 }
-/*testing*/
+/*AUTOCOMPLETE SEARCH FORM*/
 *{box-sizing: border-box;}
 .autocomplete {
-  /*the container must be positioned relative:*/
   position: relative;
   display: inline-block;
 }
 input {
   border: 1px solid transparent;
-  background-color: #f1f1f1;
+  background-color: white;
   padding: 10px;
   font-size: 16px;
 }
 input[type=text] {
-  background-color: #f1f1f1;
   width: 100%;
 }
 input[type=submit] {
@@ -122,7 +98,6 @@ input[type=submit] {
   border-bottom: none;
   border-top: none;
   z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
   top: 100%;
   left: 0;
   right: 0;

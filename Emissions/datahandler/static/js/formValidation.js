@@ -1,21 +1,26 @@
-//$(document).ready(function() {
-  //  $("#submit").attr("disabled", true);
-    //$("#select").change(function(){
-  //    if($("#select option:selected").val() != "")
-  //    {
-//        $("#submit").attr("disabled", false);
-  //    }
-  //  });
-//});
 $(document).ready(function() {
-  console.log("testing");
   $("#submit").attr("disabled", true);
-  $("#myInput").change(function(){
+  $("#myInput").keypress(function(){
     var input = $("#myInput").val();
-    console.log(jQuery.inArray(input, countriesArr));
-    if(input.length > 0 && input != "Country" )
-    {
-      $("#submit").attr("disabled", false);
-    }
+    checkIfValid(input);
+  });
+  $("body").click(function(){
+    var input = $("#myInput").val();
+    checkIfValid(input);
   });
 });
+
+function checkIfValid(input){
+  console.log(input);
+  var index = jQuery.inArray(input, countriesArr);
+  console.log(index);
+  console.log(countriesArr);
+  if(input.length > 0 && input != "Country" && index !== -1)
+  {
+    $("#submit").attr("disabled", false);
+  }
+  else
+  {
+    $("#submit").attr("disabled", true);
+  }
+}
