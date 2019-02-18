@@ -42,12 +42,11 @@ def search(request):
         country = request.POST['myCountry']
         urlEmissions = "http://api.worldbank.org/v2/en/indicator/EN.ATM.CO2E.KT?downloadformat=xml"
         rootEmissions = getXml(urlEmissions)
-        countryEmissions = findCountrysEmissions(country)
-        countryPopulation = findCountriesPopulation(country, request)
-        percapita = emissionsPerCapita(countryPopulation, countryEmissions)
+        emissions = getEmissions(country)
+        countryData = getPopulation(emissions, country)
+        countryData = dict(collections.OrderedDict(sorted(countryData.items(), key=operator.itemgetter(0), reverse=True)))
         content = {
-            "emissions": percapita,
-            "populations" : countryPopulation,
+            "countryData": countryData,
             "countries" : json.dumps(countries),
             "selectedCountry" : country
         }
@@ -55,44 +54,42 @@ def search(request):
     else:
         return redirect('/emissions')
 
-def emissionsPerCapita(countryPopulation, countryEmissions):
-        percapita = {} #key = country's emission, value = per capita
-        for year,emission in countryEmissions.items():
-            if emission is None or countryPopulation.get(year) is None:
-                strKey = "None" + year
-                percapita[strKey] = None
-            else:
-                co2Percapita = "{0:.9f}".format(float(emission) / float(countryPopulation.get(year)))
-                percapita[co2Percapita] = "{0:.3f}".format(float(emission))
-        return percapita
 
-def findCountriesPopulation(country, request):
+def getPopulation(countryData, country):
     populations = {}
     currentYear = datetime.now().year
     for record in rootCountries.findall("data/record"):
         if record.find("field/[@name = 'Country or Area']").text == country:
             year = record.find("field/[@name = 'Year']").text
             population = record.find("field/[@name = 'Value']").text
-            populations[year] = population
+            if countryData[year][0] != "None" and population != None:
+                percapita = "{0:.5f}".format(float(countryData[year][0]) / float(population))
+                countryData[year].append(population)
+                countryData[year].append(percapita)
+            elif population != None:
+                countryData[year].append(population)
+                countryData[year].append("None")
+            else:
+                countryData[year].append("None")
+                countryData[year].append("None")
             if year == str(currentYear - 2): #stop searching if last data year is reached
-                sortedRecords = dict(collections.OrderedDict(sorted(populations.items(), key=operator.itemgetter(0), reverse=True)))
-                return sortedRecords
-    sortedRecords = dict(collections.OrderedDict(sorted(populations.items(), key=operator.itemgetter(0), reverse=True)))
-    return sortedRecords
+                return countryData
+    return countryData
 
-def findCountrysEmissions(country):
+def getEmissions(country):
     records = {}
     currentYear = datetime.now().year
     for record in rootEmissions.findall("data/record"):
         if record.find("field/[@name = 'Country or Area']").text == country:
             year = record.find("field/[@name = 'Year']").text
             emissions = record.find("field/[@name = 'Value']").text
-            records[year] = emissions
+            if emissions != None:
+                 records[year] = ["{0:.5f}".format(float(emissions))]
+            else:
+                 records[year] = ["None"]
             if year == str(currentYear - 2): #stop searching if last data year is reached
-                sortedRecords = dict(collections.OrderedDict(sorted(records.items(), key=operator.itemgetter(0), reverse=True)))
-                return sortedRecords
-    sortedRecords = dict(collections.OrderedDict(sorted(records.items(), key=operator.itemgetter(0), reverse=True)))
-    return sortedRecords
+                return records
+    return records
 
 def getXml(url):
      response = urlopen(url)

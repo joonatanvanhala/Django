@@ -3,51 +3,37 @@
 {% load static %}
 <h2 class = "animated fadeIn">{{selectedCountry}}</h2>
 <div class="container" name="showEmissions">
-    <div class="col-mr-0">
+  <div class="col-ml-0">
     <table class="table table-striped">
     <thead class = "thead">
       <tr>
-        <th scope="col">Year   </th>
-        <th scope="col">Population   </th>
+        <th scope="col">Year</th>
+        <th scope="col">Population</th>
+        <th scope="col">CO2(kt)</th>
+        <th scope="col">Per capita(kt)</th>
       </tr>
     </thead>
     <tbody>
-        {%for year, population in populations.items %}
+        {%for year in countryData.items %}
         <tr>
-          <th  scope="row">{{year}}</th>
-          <th scope="row">{{population}}</th>
+          <th  scope="row">{{year.0}}</th>
+          <th scope="row">{{year.1.1}}</th>
+          {% if year.1.0 == "None" %}
+            <th scope="row">
+              <span title="No data is available from this year">None</span>
+            </th>
+            <th scope="row">
+              <span title="No data is available from this year">None</span>
+            </th>
+          {% else %}
+            <th scope="row">{{year.1.0}}</th>
+            <th scope="row">{{year.1.2}}</th>
+          {% endif%}
         </tr>
         {% endfor %}
     </tbody>
   </table>
   </div>
-  <div class="col-ml-0">
-  <table class="table table-striped">
-  <thead >
-    <tr>
-      <th scope="col">CO2(kt)</th>
-      <th scope="col">Per capita(kt)</th>
-    </tr>
-  </thead>
-  <tbody>
-      {%for percapita, emission in emissions.items %}
-      <tr>
-        {% if emission == None %}
-          <th scope="row">
-            <span title="No data is available from this year">None</span>
-          </th>
-          <th scope="row">
-            <span title="No data is available from this year">None</span>
-          </th>
-        {% else %}
-          <th scope="row">{{emission}}</th>
-          <th scope="row">{{percapita}}</th>
-        {% endif%}
-      </tr>
-      {% endfor %}
-  </tbody>
-  </table>
-</div>
 </div>
 <script>
     //East Asia & Pacific (excluding high income)

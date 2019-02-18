@@ -4,13 +4,18 @@
 <nav class="navbar navbar-expand-lg fixed-top">
   <div class="collapse navbar-collapse" id="navbarCollapse">
           <h4>Fossil Fuel Finder</h4>
-    </div>
+          <ul class="navbar-nav ml-auto">
+              <a href="http://github.com/joonatanvanhala">
+                <i class ="fab fa-github"></i>
+              </a>
+          </ul>
+  </div>
   <ul class="nav navbar-nav navbar-center">
   <div class="form">
   <form autocomplete="off" class="form-search" action="{% url 'search' %}" method="post">
     {% csrf_token %}
      <div class="autocomplete" style="width:300px;">
-         <input id="myInput" type="text" name="myCountry" placeholder="Country">
+         <input id="myInput" type="text" name="myCountry" placeholder="Country or area">
      </div>
      <button class="btn btn-sq-xs btn-dange" type="submit" id="submit">
        <i class='fas fa-search'></i>
@@ -18,7 +23,7 @@
    </form>
    </div>
    </ul>
- </nav>
+</nav>
  <script>
    var countriesStr = "{{ countries }}";
    var countriesStr2 = countriesStr.replace(/&#39;/g,'').replace(/&amp;/g, "&");
