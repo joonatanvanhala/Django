@@ -1,2 +1,30 @@
 Django project
-Application where user can compare countries fossil fuel emissions 
+Application where user can compare countries fossil fuel emissions.
+Application also includes API.
+
+Usage
+
+  Emission finder
+    -inside Emissions folder run: python manage.py runserver
+    -website is now available at http://localhost:8000/
+
+  API
+  -inside Emissions folder run: python manage.py runserver
+  -Application takes GET requests at http://localhost:8000/api/emissions/
+  -API uses Json
+
+        1. for headers use Content-Type:application/json
+
+        2. make a request body like shown below:
+          {
+            "country": "all"
+          }
+          if country parameter is set to "all", API will return all country
+          names included in the downloaded xml file
+
+          {
+            "country": "<place country name here>"
+          }
+          if country parameter is set to for example "Finland",
+          API will return all of Finland's data containing years 1960-2017,
+          and all of those years populations, emissions and per capita values
