@@ -1,12 +1,6 @@
-from rest_framework import viewsets, permissions
-from django.shortcuts import render, redirect
-from rest_framework import serializers, viewsets, routers, mixins
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from django.http import JsonResponse
+from rest_framework import serializers, viewsets, mixins, permissions
 from rest_framework.response import Response
 from .xmlparser import xmlParser, getXml
-
 
 
 class emissionsAPIview(mixins.CreateModelMixin, viewsets.GenericViewSet):

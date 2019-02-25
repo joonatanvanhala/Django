@@ -14,15 +14,18 @@ import zipfile
 import json
 
 def xmlParser(json, rootCountries, rootEmissions):
-    country = json["country"]
-    #get request asks names of the countries
-    if country == "all":
-        countries = getCountries(rootCountries)
-        return countries
-    #get request asks all data from every country
+    if "country" in json:
+        country = json["country"]
+        #get request asks names of the countries
+        if country == "all":
+            countries = getCountries(rootCountries)
+            return countries
+        #get request asks all data from every country
+        else:
+            data = allData(country, rootCountries, rootEmissions)
+            return data
     else:
-        data = allData(country, rootCountries, rootEmissions)
-        return data
+        return ["get request did not contain necessary data"]
 
 def allData(country, rootCountries, rootEmissions):
     emissions = getEmissions(country, rootEmissions)
